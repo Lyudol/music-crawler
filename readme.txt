@@ -1,5 +1,6 @@
 List of approved source websites:
 1.) Genius
+2.) AZlyrics
 -------------------------------------------------------
 Step 1:
   Crawl through MusixMatch for songs with an "Add Lyrics" button
