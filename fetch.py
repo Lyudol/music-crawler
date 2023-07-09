@@ -27,7 +27,6 @@ def openwebsite(website):
     driver.get(website)
 
 def clickcookie():
-    time.sleep(2)
     WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[9]/div[2]/div/div[1]/div/div[2]/div/button[2]"))).click()
 def load():
     element = driver.find_element(By.XPATH, "/html/body/div[2]/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/div[2]")
