@@ -22,7 +22,7 @@ options.add_argument("--disable-infobars")
 # options.add_argument("--start-maximized")
 options.add_argument("--disable-extensions")
 options.add_argument('--window-size=1920,1080')
-options.add_argument("--headless")
+# options.add_argument("--headless")
 options.add_experimental_option("detach", True) 
 
 
@@ -69,12 +69,12 @@ def load(drivertouse):
     drivertouse.execute_script("arguments[0].scrollIntoView(true);", element);
     WebDriverWait(drivertouse, 20).until(EC.element_to_be_clickable((By.XPATH, "/html/body/div[2]/div/div[2]/div/div/div/div[2]/div/div/div[2]/div/div[2]"))).click()
 
-def geniusfetch():
-    openwebsite("https://genius.com/Jay-z-holy-grail-lyrics")
+def geniusfetch(website):
+    openwebsite(website)
     print(driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/div[3]/div/div/div[2]").text)
 
-def azfetch():
-    openwebsite("https://www.azlyrics.com/lyrics/oliviarodrigo/vampire.html")
+def azfetch(website):
+    openwebsite(website)
     print(driver.find_element(By.XPATH, "/html/body/div[2]/div[2]/div[2]/div[5]").text)
 
     

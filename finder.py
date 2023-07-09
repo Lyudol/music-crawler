@@ -26,9 +26,12 @@ def gettracks(drivertouse):
     with open("json"+str(drivers.index(drivertouse))+".txt", "r") as file:
                 jsonified = file.read()
                 jsonified = json.loads(jsonified)
-
-    tracks = jsonified["html"][0]["body"][0]["div"][1]["div"][0]["div"][1]["div"][0]["div"][0]["div"][0]["div"][1]["div"][0]["div"][0]["div"][1]["div"][0]["div"][0]["ul"][0]["li"]
-    return tracks
+    try:
+        tracks = jsonified["html"][0]["body"][0]["div"][1]["div"][0]["div"][1]["div"][0]["div"][0]["div"][0]["div"][1]["div"][0]["div"][0]["div"][1]["div"][0]["div"][0]["ul"][0]["li"]
+        return tracks
+    except:
+         return "error"
+    
 
 def getsong(tracks, tracknumber):
     name = tracks[tracknumber]["div"][0]["div"][0]["img"][0]["_attributes"]["alt"]
@@ -43,7 +46,7 @@ def findtoadd(tracks):
     for track in tracks:
             if "div" in track["div"][0]["div"][0].keys():
                     
-                    print(getsong(tracks,tracknumber))
+                    # print(getsong(tracks,tracknumber))
                     found.append(getsong(tracks,tracknumber))
                     tracknumber += 1
             else:
@@ -56,8 +59,12 @@ def getter(drivertouse):
         
     getjson(drivertouse)               # gets json of page
     tracks = gettracks(drivertouse)    # gets all tracks
-    found = findtoadd(tracks) # finds ones that needs lyrics
-    return found #returns
+    if tracks != "error":
+        found = findtoadd(tracks) # finds ones that needs lyrics
+        return found
+    else:
+        print("Current search yielded an error, typically no tracks.")
+        return "error" #returns
 
 
 def main(drivertouse,terms):
@@ -66,10 +73,13 @@ def main(drivertouse,terms):
     for term in terms:   # searches each letter
         opensite("https://www.musixmatch.com/search/" + term + "/tracks", drivertouse)
         found = getter(drivertouse)
-        file = open('songsfound.txt','a', encoding="utf-8")             # adds lyric to add to file
-        for song in found:
-            file.write(song+"\n")
-        file.close()
+        if found != "error":
+            file = open('songsfound.txt','a', encoding="utf-8")             # adds lyric to add to file
+            for song in found:
+                file.write(song+"\n")
+            file.close()
+        else:
+             pass
           
 
 #n = amount of drivers
